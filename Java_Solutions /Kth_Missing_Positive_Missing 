@@ -3,6 +3,8 @@
 /*
 @Parameters: An integer array and the integer to find 
 
+@Performs: Binary Search on the list where it assumes the length of m which is missing and ultimately returns 
+
 @Returns: 
 */ 
 
