@@ -1,0 +1,55 @@
+class BrowserHistory {
+    
+    private BrowserNode head;
+    private BrowserNode current;    
+
+    public BrowserHistory(String homepage) {
+        //'homepage' is the head node
+        head = new BrowserNode(homepage);
+        current = head;
+    }
+    
+    public void visit(String url) {
+        BrowserNode visitingNode = new BrowserNode(url);
+        current.next = visitingNode;
+        visitingNode.prev = current;
+        current = visitingNode;
+    }
+    
+    public String back(int steps) {
+        //Move the pointer in the previous direction
+        while (steps >0 && current.prev != null){
+            current = current.prev;
+            steps--;
+        }
+        return current.data;
+    }
+    
+    public String forward(int steps) {
+        while (steps >0 && current.next != null){
+            current = current.next;
+            steps--;
+        }
+        return current.data;
+    }
+
+class BrowserNode {
+    public String data;
+    public BrowserNode prev, next;
+    public BrowserNode(String url){
+        data = url;
+        prev = null;
+        next = null;
+        
+        }
+    }
+}
+
+/**
+ * Your BrowserHistory object will be instantiated and called as such:
+ * BrowserHistory obj = new BrowserHistory(homepage);
+ * obj.visit(url);
+ * String param_2 = obj.back(steps);
+ * String param_3 = obj.forward(steps);
+ */
+ //This looks like we save the history as a node in a linked list and move forward and backward via an iterator
