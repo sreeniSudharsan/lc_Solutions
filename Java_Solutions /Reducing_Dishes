@@ -1,0 +1,60 @@
+class Solution {
+    // public int maxSatisfaction(int[] satisfaction) {
+    //          Arrays.sort(satisfaction);
+
+    //         int[][] memo = new int[satisfaction.length + 1][satisfaction.length +1];
+
+    //         //Mark all states as -1 
+    //         for(int i =0; i< satisfaction.length; i++){
+    //             Arrays.fill(memo[i], -1);
+    //         }
+
+    //         return findMaxSat(satisfaction, memo, 0, 1);
+
+    // }
+
+    // public int findMaxSat(int[] satisfaction, int[][] memo, int index, int time){
+       
+    //     //Reached end of array
+    //     if (index == satisfaction.length){
+    //         return 0;
+    //     }
+
+    //     //Already have answer
+    //     if(memo[index][time] != -1){
+    //         return memo[index][time];
+    //     }
+
+    //     // Return max of two choices
+    //     // 1. COok the dish at index with time taken as 'time' and move on to the next dish with time = time+1
+    //     // 2. Skip the current dish and keep time the same
+    //     return memo[index][time] = Math.max(satisfaction[index]*time + findMaxSat(satisfaction, memo, index+1, time+1)
+    //                                         ,findMaxSat(satisfaction, memo, index+1, time));
+
+    // }
+
+
+/************GREEDY APPROACH!***************/
+
+    public int maxSatisfaction(int[] satisfaction){
+        Arrays.sort(satisfaction);
+
+        int maxSatisfaction = 0;
+        int suffixSum = 0;
+
+        for (int i = satisfaction.length -1; i>=0 && suffixSum + satisfaction[i] > 0;i-- ){
+            suffixSum += satisfaction[i];
+            maxSatisfaction += suffixSum;
+        }
+        return maxSatisfaction;
+    }
+
+
+
+
+
+
+
+
+
+}
